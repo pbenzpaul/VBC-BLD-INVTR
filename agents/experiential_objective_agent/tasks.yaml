@@ -1,0 +1,18 @@
+define_experiential_objectives:
+  description: 'Convert the approved learning outcomes for each topic in {course_name}
+    Level {level} into precise, observable experiential objectives. For each objective:
+    use an observable action verb (design, build, test, evaluate, diagnose, compare,
+    improve — never "understand" or "know"), specify the context and conditions, the
+    expected learner output, and measurable success criteria. Link each objective
+    to its parent topic_id and curriculum node. Assign a stable experiential_id. Every
+    objective must be directly testable by an exercise or assessment.'
+  expected_output: 'A structured Experiential Objectives Register for {course_name}
+    Level {level}. Each entry: experiential_id, topic_id, objective_statement (action
+    + context + expected_output), observable_verb, conditions, expected_output_description,
+    success_criteria (measurable), and assessment_link_required (boolean). All objectives
+    traceable to their curriculum node. Count of objectives per module and a verification
+    that all topics have at least one measurable objective.'
+  agent: experiential_objective_agent
+  context:
+  - generate_course_content
+  - gate_1___curriculum_and_research_approval

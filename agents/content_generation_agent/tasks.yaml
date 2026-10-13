@@ -1,0 +1,18 @@
+generate_course_content:
+  description: 'Generate detailed student-facing and instructor-facing content for
+    {course_name} Level {level} based on the approved curriculum, curated research
+    pack, and learning design. For each topic, produce content blocks covering: explanations,
+    examples, demonstrations, and instructor notes. Include citations (research_id
+    references) for all research-derived factual claims. Never add unsupported facts.
+    Reflect the academy''s positioning differentiators in tone and depth — without
+    mentioning competitor courses in student content. Assign a stable content_id to
+    each block.'
+  expected_output: 'A structured Content Library for {course_name} Level {level} with
+    content blocks per topic. Each block: content_id, topic_id, content_type (explanation/example/demonstration/instructor_note),
+    body (full text), citations (list of research_ids), and governance_flags (any
+    constraints applied). All blocks traceable to their source curriculum node and
+    research evidence. Total word count and citation count summary.'
+  agent: content_generation_agent
+  context:
+  - generate_learning_design
+  - curate_evidence_and_research_pack

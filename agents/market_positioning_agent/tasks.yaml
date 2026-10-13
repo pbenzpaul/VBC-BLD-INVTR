@@ -1,0 +1,17 @@
+market_pricing_and_positioning_analysis:
+  description: 'Using the Competitor Map from the competitive intelligence research,
+    synthesize a Pricing and Value Brief for {course_name}. Research current market
+    pricing trends for similar professional training programs. Recommend: a price
+    range with tier options (e.g. self-paced, cohort, bundle), a positioning statement,
+    the top 3-5 genuine differentiators vs competitors, and suggested messaging for
+    the course-family blueprint. Ground every recommendation in evidence from the
+    competitor map and market data. This brief feeds the Academy Constitution''s strategic
+    context section — it is NOT student-facing content.'
+  expected_output: 'A Pricing and Value Brief containing: recommended_price_range
+    (with justification), pricing_tiers (at least 2 options with rationale), positioning_statement
+    (2-3 sentences), top_differentiators (list of 3-5 with evidence), suggested_messaging
+    (short copy for blueprint), and data_sources (URLs used). All recommendations
+    backed by competitor data and market evidence.'
+  agent: market_positioning_agent
+  context:
+  - competitive_intelligence_research

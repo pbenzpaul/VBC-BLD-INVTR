@@ -1,0 +1,17 @@
+research_course_topics:
+  description: 'For each topic in the drafted curriculum for {course_name} Level {level},
+    conduct web research to find current, authoritative, and relevant material. Search
+    for primary sources: official documentation, research papers, institutional sources,
+    and reputable industry experts. For every source found, record: research_id, title,
+    URL, author_or_organization, publication_date, retrieval_date, relevant_excerpt,
+    supported_claims, topic_id_mapping, and reliability_notes. Flag paywalled, inaccessible,
+    or weak-evidence sources. Never fabricate citations. Aim for at least 2-3 high-quality
+    sources per topic.'
+  expected_output: 'A Research Repository for {course_name} Level {level} containing
+    structured research items per topic. Each item: research_id, topic_id, title,
+    URL, author_or_organization, publication_date, retrieval_date, source_type, excerpt,
+    supported_claims, reliability_notes, and access_status (accessible/paywalled/inaccessible).
+    Total source count and a brief per-topic research coverage summary.'
+  agent: research_agent
+  context:
+  - draft_level_curriculum_structure

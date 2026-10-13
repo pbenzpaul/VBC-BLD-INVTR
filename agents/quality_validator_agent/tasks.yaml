@@ -1,0 +1,21 @@
+quality_validation:
+  description: 'Run structured quality checks across all generated content for {course_name}
+    Level {level}: curriculum alignment, factual support and citation validity, objective-activity-assessment
+    traceability, governance compliance, age/level appropriateness, timing estimates,
+    duplication check, completeness check, and artifact schema validity. Classify
+    each issue as hard_fail, warning, or advisory. For any hard_fail, identify: the
+    violated rule_id, the responsible agent/capability, the specific affected object_id,
+    and the recommended fix. Hard-fails must be flagged clearly for correction before
+    Gate 2. Maximum correction retries: 3. If hard-fails persist after 3 attempts,
+    escalate to human.'
+  expected_output: 'A structured Validation Report with: validation_id, course_id,
+    level, result (pass/fail/warnings), checks (each with rule_id, severity, target_object_id,
+    message, evidence, recommended_fix, responsible_capability), hard_fail_count,
+    warning_count, advisory_count, retry_recommended (boolean), requires_human_review
+    (boolean), and overall_status. A clear PASS or FAIL verdict. If FAIL: a prioritized
+    correction list for the orchestrator to route.'
+  agent: quality_validator
+  context:
+  - generate_course_content
+  - generate_exercises_and_assessments
+  - define_experiential_objectives

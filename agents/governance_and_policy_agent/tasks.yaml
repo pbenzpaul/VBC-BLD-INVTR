@@ -1,0 +1,63 @@
+load_and_apply_governance_rules:
+  description: 'Load the Academy Constitution ({academy_constitution}), the course-family
+    blueprint for {course_family}, and any course-specific rules for {course_name}.
+    Produce a consolidated Governance Profile that lists all applicable rules, each
+    with: rule_id, scope (academy/family/course), severity (hard_fail/warning/advisory),
+    description, test method, and owner. This profile will be referenced by every
+    subsequent agent to ensure governance compliance throughout — not just at the
+    end.'
+  expected_output: 'A structured Governance Profile document listing all applicable
+    rules for this course run, organized by scope (academy-wide, course-family, course-specific)
+    and severity. Includes: rule_id, scope, severity, description, test_method, owner.
+    Plus a brief summary of the top constraints the content agents must respect for
+    {course_name} Level {level}.'
+  agent: governance_and_policy_agent
+  context:
+  - resolve_course_workspace_and_intent
+gate_1___curriculum_and_research_approval:
+  description: 'Compile and present the Gate 1 approval package for {course_name}
+    Level {level} to the human course designer. The package must include: (1) proposed
+    curriculum structure with module/topic breakdown and durations, (2) research summary
+    with source links and coverage quality per topic, (3) curated evidence highlights
+    and any conflicts or uncertainties, (4) governance compliance check results, (5)
+    teaching approach and pedagogical alignment, (6) assumptions made, (7) risks and
+    unresolved questions, and (8) the Pricing and Value Brief summary. Present this
+    clearly and ask the human to choose one of: APPROVE, REQUEST CHANGES, REQUEST
+    MORE RESEARCH, or REJECT. The workflow MUST NOT proceed to content generation
+    without an explicit APPROVE decision. Record the approval with: approver, decision,
+    timestamp, version reviewed, and any conditions.'
+  expected_output: 'A complete Gate 1 Approval Package presented to the human, containing
+    all required sections. The human''s explicit decision (APPROVE / REQUEST CHANGES
+    / REQUEST MORE RESEARCH / REJECT) recorded as a structured Approval Record with:
+    approval_id, gate="Gate1", course_id, course_version_id, level, decision, approver,
+    timestamp, version_reviewed, comments, and conditions. If not APPROVE, a clear
+    description of what changes or additional work are required before resubmission.'
+  agent: governance_and_policy_agent
+  context:
+  - draft_level_curriculum_structure
+  - curate_evidence_and_research_pack
+  - market_pricing_and_positioning_analysis
+  - load_and_apply_governance_rules
+gate_2___learning_package_approval:
+  description: 'Compile and present the Gate 2 approval package for {course_name}
+    Level {level} to the human course designer. The package must include: (1) the
+    full content library summary with sample content blocks, (2) the Experiential
+    Objectives Register, (3) the Assessment Pack summary with sample exercises, (4)
+    the Quality Validation Report (must show no unresolved hard-fails), (5) governance
+    compliance confirmation, (6) any warnings or advisories for the designer''s awareness,
+    and (7) a change impact summary if this revised any previously approved content.
+    Ask the human to choose: APPROVE, REQUEST CHANGES, or REJECT. The workflow MUST
+    NOT proceed to export or publishing without an explicit APPROVE. Record the approval
+    with full details.'
+  expected_output: 'A complete Gate 2 Approval Package presented to the human. The
+    human''s explicit decision recorded as a structured Approval Record: approval_id,
+    gate="Gate2", course_id, course_version_id, level, decision, approver, timestamp,
+    version_reviewed, comments, conditions, and validation_report_id. If APPROVE:
+    a summary of what is now cleared for artifact generation and export. If REQUEST
+    CHANGES or REJECT: a clear description of required changes before resubmission.'
+  agent: governance_and_policy_agent
+  context:
+  - quality_validation
+  - generate_course_content
+  - generate_exercises_and_assessments
+  - define_experiential_objectives

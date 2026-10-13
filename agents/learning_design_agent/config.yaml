@@ -1,0 +1,8 @@
+llm:
+  model: openai/gpt-4o
+reasoning: false
+inject_date: true
+allow_delegation: false
+max_iter: 25
+max_rpm: null
+max_execution_time: null
