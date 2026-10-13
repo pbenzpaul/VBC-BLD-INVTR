@@ -13,23 +13,7 @@ TOOL_REGISTRY = {
     "ScrapeWebsiteTool": ScrapeWebsiteTool,
 }
 
-# Canonical sequential order (matches original tasks.yaml flow).
-TASK_ORDER = [
-    "resolve_course_workspace_and_intent",
-    "load_and_apply_governance_rules",
-    "competitive_intelligence_research",
-    "market_pricing_and_positioning_analysis",
-    "draft_level_curriculum_structure",
-    "research_course_topics",
-    "curate_evidence_and_research_pack",
-    "gate_1___curriculum_and_research_approval",
-    "generate_learning_design",
-    "generate_course_content",
-    "define_experiential_objectives",
-    "generate_exercises_and_assessments",
-    "quality_validation",
-    "gate_2___learning_package_approval",
-]
+from ai_course_development_system.task_order import TASK_ORDER
 
 
 def _yaml(path: Path):

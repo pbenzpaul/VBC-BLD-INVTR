@@ -7,7 +7,7 @@ from pathlib import Path
 
 from flask import Flask, redirect, request, url_for
 
-from ai_course_development_system.crew import AiCourseDevelopmentSystemCrew, TASK_ORDER
+from ai_course_development_system.task_order import TASK_ORDER
 
 RUNS_DIR = Path(__file__).parent / "runs"
 RUNS_DIR.mkdir(exist_ok=True)
@@ -24,6 +24,13 @@ def _save(run_id: str):
 
 def _run_crew(run_id: str, inputs: dict):
     run = RUNS[run_id]
+    try:
+        from ai_course_development_system.crew import AiCourseDevelopmentSystemCrew
+    except ImportError as e:
+        run["status"] = f"error: crew engine not installed on this host ({e})"
+        run["updated"] = datetime.now(timezone.utc).isoformat()
+        _save(run_id)
+        return
     try:
         crew = AiCourseDevelopmentSystemCrew().crew()
         by_name = {t.description: t for t in crew.tasks}
