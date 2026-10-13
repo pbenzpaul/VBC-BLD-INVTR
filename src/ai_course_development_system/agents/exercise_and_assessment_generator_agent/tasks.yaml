@@ -1,0 +1,19 @@
+generate_exercises_and_assessments:
+  description: 'Create aligned exercises, projects, quizzes, and assessments for {course_name}
+    Level {level} based on the Experiential Objectives Register. For each exercise/assessment:
+    link to its experiential_id, write full instructions, specify learner inputs,
+    expected output format, estimated duration, grading rubric with specific criteria,
+    hints (where appropriate), accessibility considerations, a reflection prompt,
+    and an optional extension task. Ensure every exercise genuinely tests the linked
+    objective — not a related but different skill. Assign a stable exercise_id to
+    each item.'
+  expected_output: 'A complete Assessment Pack for {course_name} Level {level} with
+    all exercises and assessments. Each item: exercise_id, experiential_id, title,
+    type (exercise/project/quiz/assessment), instructions (full text), learner_inputs,
+    expected_output, duration_minutes, rubric (criteria with point values), hints,
+    accessibility_notes, reflection_prompt, extension_task, and alignment_verified
+    (boolean). Coverage check confirming every experiential objective has at least
+    one aligned assessment item.'
+  agent: exercise_and_assessment_generator
+  context:
+  - define_experiential_objectives

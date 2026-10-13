@@ -1,0 +1,18 @@
+generate_learning_design:
+  description: 'Convert the Gate 1-approved curriculum and curated research pack for
+    {course_name} Level {level} into a detailed Learning Design Document. For each
+    topic, specify: key concepts (with source citations), prerequisite knowledge,
+    common misconceptions and how to address them, concrete examples and demonstrations,
+    real-world connections, recommended teaching sequence, cognitive load considerations,
+    and proposed learning experiences. The design must align with the academy''s pedagogical
+    philosophy and experiential learning model from the governance profile.'
+  expected_output: 'A structured Learning Design Document for {course_name} Level
+    {level} with a section per topic containing: topic_id, key_concepts (with citation
+    IDs), prerequisites, misconceptions (list with suggested handling), examples (list),
+    demonstrations (list), real_world_connections (list), teaching_sequence (ordered
+    steps), cognitive_load_notes, and proposed_learning_experiences (list of activity
+    types). Each topic section traceable to its curriculum node_id and research evidence.'
+  agent: learning_design_agent
+  context:
+  - gate_1___curriculum_and_research_approval
+  - curate_evidence_and_research_pack

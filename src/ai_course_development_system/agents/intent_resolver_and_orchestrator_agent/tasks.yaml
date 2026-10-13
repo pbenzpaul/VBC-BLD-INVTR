@@ -1,0 +1,15 @@
+resolve_course_workspace_and_intent:
+  description: 'Process the user''s request: "{user_request}" for course "{course_name}"
+    Level {level} (Course Family: {course_family}, Course ID: {course_id}). Load the
+    current workspace state if it exists. Identify the exact course version, open
+    decisions, pending work, and last workflow state. Summarize the current state.
+    Identify affected curriculum objects. Flag any ambiguities that require clarification
+    before proceeding. Output a structured JSON intent record with: course_id, course_version_id,
+    level, target_object_ids, proposed_task_plan, missing_information, risk_flags,
+    and next_action.'
+  expected_output: 'A structured JSON intent record containing: course_id, course_version_id,
+    level, user_request summary, target_object_ids, proposed_task_plan (ordered list
+    of capabilities to invoke), missing_information (empty list if none), risk_flags,
+    requires_human_approval (boolean), and next_action. Plus a human-readable workspace
+    state summary (current status of this course/level, open decisions, pending tasks).'
+  agent: intent_resolver_and_orchestrator

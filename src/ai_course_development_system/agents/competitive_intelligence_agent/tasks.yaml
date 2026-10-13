@@ -1,0 +1,18 @@
+competitive_intelligence_research:
+  description: 'Research the competitive landscape for {course_name} in the {course_family}
+    market. Search course marketplaces (Udemy, Coursera, LinkedIn Learning, bootcamps,
+    and specialist academies) for comparable courses. For each competitor course found,
+    capture: provider name, course title, URL, price, duration, format (self-paced/live/cohort),
+    topic coverage summary, technical depth, average learner rating, number of reviews,
+    notable strengths, and identified gaps or weaknesses. Produce a structured Competitor
+    Map with at least 5 competitor entries. This output is strategic intelligence
+    only — it does not appear in student-facing curriculum content.'
+  expected_output: 'A structured Competitor Map containing at least 5 competitor course
+    entries, each with: provider, title, URL, price, duration, format, topic_coverage,
+    depth_level, rating, review_count, strengths, and gaps. Plus a summary section
+    highlighting the top differentiation opportunities for {course_name} based on
+    the analysis.'
+  agent: competitive_intelligence_agent
+  async_execution: true
+  context:
+  - resolve_course_workspace_and_intent

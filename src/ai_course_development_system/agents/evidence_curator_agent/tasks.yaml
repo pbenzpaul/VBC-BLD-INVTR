@@ -1,0 +1,17 @@
+curate_evidence_and_research_pack:
+  description: 'Process the raw research repository for {course_name} Level {level}.
+    Deduplicate sources, rank by relevance and authority, detect conflicting claims
+    or outdated material, and map evidence to specific curriculum topics. Distinguish
+    between: sourced facts, agent interpretation, recommendations, and unresolved
+    uncertainty. When sources conflict, preserve both positions and explain the disagreement
+    — never silently choose one. Produce a curated Research Pack ready for content
+    generation.'
+  expected_output: 'A curated Research Pack for {course_name} Level {level} containing:
+    deduplicated and ranked sources per topic, a conflict_register (list of conflicting
+    claims with both positions and explanation), an uncertainty_register (unresolved
+    or weakly-evidenced claims), a topic_evidence_map (topic_id → list of research_ids
+    with relevance scores), and an overall research quality summary (strong/adequate/weak
+    coverage per topic).'
+  agent: evidence_curator
+  context:
+  - research_course_topics

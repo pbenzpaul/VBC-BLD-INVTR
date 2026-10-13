@@ -1,0 +1,18 @@
+draft_level_curriculum_structure:
+  description: 'Draft the canonical curriculum structure for {course_name} Level {level}.
+    Using the governance profile and workspace context, define: course-level outcomes,
+    modules (with stable node IDs), topics per module (with node IDs, sequence numbers,
+    duration estimates, and prerequisites), and the assessment map. Clearly separate
+    curriculum structure from detailed lesson content — do not write lesson text here.
+    Reflect any positioning differentiators from the market brief in the topic selection
+    and emphasis. If a prior approved curriculum exists for this level, load it and
+    propose only targeted changes — do not silently overwrite it.'
+  expected_output: 'A structured Curriculum Document for {course_name} Level {level}
+    with: level_outcomes (list), modules (each with module_id, title, description,
+    sequence, duration), topics per module (each with topic_id, parent_module_id,
+    title, description, sequence, duration, prerequisites), and assessment_map linking
+    topics to objectives. Plus a change_summary if this revises a prior approved version.'
+  agent: curriculum_manager
+  context:
+  - load_and_apply_governance_rules
+  - market_pricing_and_positioning_analysis
