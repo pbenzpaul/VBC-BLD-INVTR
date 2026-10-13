@@ -116,7 +116,7 @@ def list_runs():
 @app.get("/runs/<run_id>")
 def show_run(run_id):
     run = RUNS.get(run_id)
-    if run is None and (RUNS_DIR / f"{run_id}.json").exists():
+    if run is None and RUNS_DIR is not None and (RUNS_DIR / f"{run_id}.json").exists():
         run = RUNS[run_id] = json.loads((RUNS_DIR / f"{run_id}.json").read_text())
     if run is None:
         return "Unknown run", 404
