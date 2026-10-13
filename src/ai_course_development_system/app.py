@@ -10,7 +10,10 @@ from flask import Flask, redirect, request, url_for
 from ai_course_development_system.task_order import TASK_ORDER
 
 RUNS_DIR = Path(__file__).parent / "runs"
-RUNS_DIR.mkdir(exist_ok=True)
+try:
+    RUNS_DIR.mkdir(exist_ok=True)
+except OSError:
+    RUNS_DIR = None  # read-only filesystem (e.g. serverless): memory-only
 RUNS: dict = {}
 
 FIELDS = ["course_name", "level", "course_family", "course_id", "academy_constitution", "user_request"]
@@ -19,7 +22,12 @@ app = Flask(__name__)
 
 
 def _save(run_id: str):
-    (RUNS_DIR / f"{run_id}.json").write_text(json.dumps(RUNS[run_id], default=str))
+    if RUNS_DIR is None:
+        return
+    try:
+        (RUNS_DIR / f"{run_id}.json").write_text(json.dumps(RUNS[run_id], default=str))
+    except OSError:
+        pass  # ephemeral filesystem: keep run in memory only
 
 
 def _run_crew(run_id: str, inputs: dict):
@@ -80,11 +88,19 @@ def index():
 @app.post("/run")
 def start_run():
     inputs = {f: request.form.get(f, "") for f in FIELDS}
+    try:
+        import ai_course_development_system.crew  # noqa: F401
+        engine = True
+    except ImportError:
+        engine = False
     run_id = uuid.uuid4().hex[:8]
-    RUNS[run_id] = {"id": run_id, "status": "running", "inputs": inputs,
-                    "outputs": {}, "updated": datetime.now(timezone.utc).isoformat()}
+    RUNS[run_id] = {"id": run_id,
+                    "status": "running" if engine else "error: crew engine not installed on this host — run locally",
+                    "inputs": inputs, "outputs": {},
+                    "updated": datetime.now(timezone.utc).isoformat()}
     _save(run_id)
-    threading.Thread(target=_run_crew, args=(run_id, inputs), daemon=True).start()
+    if engine:
+        threading.Thread(target=_run_crew, args=(run_id, inputs), daemon=True).start()
     return redirect(url_for("show_run", run_id=run_id))
 
 
